@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <script>
+        inRange = false;
+        let person = {}
+        person.age = 22;
+        let person2 = {}
+        person2.age = 10;
+
+        function checkAge(p1) {
+            if (p1.age > 20 && p1.age < 40) {
+                inRange = true;
+            } else {
+                inRange = false;
+            }
+            return inRange;
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" onclick="alert(checkAge(person))" value="Check Person 1's Age" />
+    <input type="button" onclick="alert(checkAge(person2))" value="Check Person 2's Age" />
+</body>
+
+</html>

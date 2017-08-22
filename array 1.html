@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <script>
+        let array1 = ["leon", "ben", "john"]
+    </script>
+</head>
+
+<body>
+    <form>
+        <div>
+            <label for="addToArray">String to Add: </label>
+            <input type="text" id="addToArray" name="addToArray">
+        </div>
+        <div>
+            <input type="button" onclick="array1[array1.length]=addToArray.value" value="Add to Array" />
+            <input type="button" onclick="alert(array1)" value="Display Array" />
+        </div>
+    </form>
+</body>
+
+</html>

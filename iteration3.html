@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <script>
+        function letsGo(max, threeWord, fiveWord) {
+            for (let i = 1; i <= max; i++) {
+                if (i % 5 == 0 && i % 3 == 0) {
+                    document.write(fiveWord+threeWord+", ");
+                }else if(i%5==0){
+                    document.write(fiveWord+", ");
+                }else if(i%3==0){
+                    document.write(threeWord+", ");
+                }else document.write(i+", ");
+            }
+        }
+        letsGo(30, "go", "lets");
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

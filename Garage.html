@@ -1,0 +1,131 @@
+<html>
+
+<head>
+    <script>
+         let para = document.createElement("P");
+
+        function carMaker(make, registration, numberOfWheels, faults) {
+            let it = {}
+            it.make = make.toUpperCase();
+            it.registration = registration.toUpperCase();
+            it.numberOfWheels = numberOfWheels;
+            it.faults = faults;
+            return it;
+        }
+        let garage = {}
+        garage.cars = []
+        let intake = garage.cars;
+        let car1 = carMaker("seat", "m145rt", 4, 2);
+        intake.push(car1)
+
+        console.log("Intake is " + JSON.stringify(intake[0], null, 2));
+
+        function addToGarage(make, registration, numberOfWheels, faults) {
+            let it = carMaker(make, registration, numberOfWheels, faults);
+            garage.cars.push(it);
+        }
+
+        function removeFromGarage(regist) {
+            let filtered = intake.filter(function (car) {
+                return car.registration !== regist.toUpperCase();
+            });
+            intake = filtered;
+        }
+
+        function printGarage() {
+            let x = document.getElementById("garageoutput")
+            x.innerHTML = "";
+            intake.forEach((a) => {
+                x.innerHTML += (a.make).toUpperCase() + ", " + (a.registration).toUpperCase() + ", " + a.numberOfWheels + ", " + a.faults;
+                document.getElementById("garageoutput").appendChild(para)
+            })
+        }
+
+        function calculateBill(regist) {
+            intake.map(function (car) {
+                if (regist.toUpperCase() === car.registration) {
+                    window.alert("$" + car.faults * 25);
+                }
+            })
+        }
+
+
+        function parseInput(input) {
+            let orderArray = input.split(" ");
+            if (orderArray[0] === "create") {
+                addToGarage(orderArray[2], orderArray[3], orderArray[4], orderArray[5]);
+            } else if (orderArray[0] === "output") {
+                printGarage();
+            } else if (orderArray[0] === "check" && orderArray[1] === "out") {
+                removeFromGarage(orderArray[2])
+            } else if (orderArray[0] === "calculate") {
+                calculateBill(orderArray[2])
+            } else {
+                window.alert("Sorry that input is not recognised. Please check the recognised commands!")
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <form>
+        <div>
+            <label for="Car Make">Car Make:  </label>
+            <input type="text" id="Make" name="Make">
+            <br>
+            <label for="registraion">Registraion:  </label>
+            <input type="text" id="registration" name="registration">
+            <br>
+            <label for="numberOfWheels">No of Wheels:  </label>
+            <input type="text" id="numberOfWheels" name="numberOfWheels">
+            <br>
+            <label for="Faults">Faults:  </label>
+            <input type="text" id="Faults" name="Faults">
+            <br>
+        </div>
+        <input type="button" onclick="addToGarage(Make.value, registration.value, numberOfWheels.value, Faults.value)" value="Create car">
+        <input type="button" onclick="printGarage()" value="Output Garage">
+        <br><br>
+        <div>
+            <label for="remove">Car Registration to Remove:  </label>
+            <input type="text" id="remove" name="remove">
+            <input type="button" onclick="removeFromGarage(remove.value)" value="Check out car">
+        </div>
+        <br> <br>
+        <div>
+            <label for="Car Bill">Car for Bill:  </label>
+            <input type="text" id="Bill" name="Bill">
+            <br>
+            <input type="button" onclick="calculateBill(Bill.value)" value="Calculate Bill car">
+        </div>
+        <div>
+            <p id="garageoutput">
+            </p>
+        </div>
+        <br><br>
+        <label for="consolebox">Console:  </label>
+        <input type="text" id="consolebox" name="consolebox">
+        <input type="button" onclick="parseInput(consolebox.value)" value="Input!">
+        <div id="console">
+            <p id="consoleP">
+            </p>
+            <br>
+            <p id="commands"> Recognised commands include:<br> Create car Peugeot yk10ykm 4 2<br> output Garage<br> check out yk10ykm<br> calculate
+                bill yk10ykm<br>
+            </p>
+        </div>
+
+    </form>
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

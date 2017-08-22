@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <script>
+function tripleStringCalc(input){
+let counter = 0;
+
+for(let i = 0; i < input.length-2; i++){
+    if(input.charAt(i)===input.charAt(i+1)&&input.charAt(i)===input.charAt(i+2)){
+        counter++;
+        i=i+2;
+    }
+}
+window.alert("Number of Triples: " + counter)
+}
+
+    </script>
+</head>
+
+<body>
+        <form>
+                <div>
+                    <label for="triples">Input:  </label>
+                    <input type="text" id="triples" name="triples">
+                </div>
+                <input type="button" onclick="tripleStringCalc(triples.value)" value="Calculate">
+            </form>
+</body>
+
+</html>

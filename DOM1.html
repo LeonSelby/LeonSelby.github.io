@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <script>
+        function createPTagToDiv1() {
+            let para = document.createElement("P");
+            let att = document.createAttribute("id");
+            att.value = "paragraph";
+            para.setAttributeNode(att);
+            document.getElementById("div1").appendChild(para);
+        }
+        function deletePTag() {
+            var element = document.getElementById("paragraph");
+            element.parentNode.removeChild(element);
+        }
+        function addToParagraph(input) {
+            if(!document.getElementById("paragraph")){
+                createPTagToDiv1();
+            }
+            document.getElementById("paragraph").innerHTML += input;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+    </div>
+    <form>
+
+        <input type="button" onclick="createPTagToDiv1()" value="Create Paragraph">
+        <input type="button" onclick="addToParagraph(inputting.value)" value="Add to Paragraph">
+        <input type="button" onclick="deletePTag()" value="Delete Paragraph">
+        <div>
+            <label for="inputting">Input:  </label>
+            <input type="text" id="inputting" name="inputting">
+        </div>
+    </form>
+</body>
+
+</html>
