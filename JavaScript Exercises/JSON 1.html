@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <script>
+        let reqURL = 'https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/example.json';
+        let br = document.createElement("br");
+        let request = new XMLHttpRequest();
+        request.open('GET', reqURL);
+        request.responseType = 'json';
+        request.send();
+        request.onload = function () {
+            populateHeader();
+            populateMembers();
+        }
+
+
+        function populateHeader() {
+            let reqData = request.response;
+            let myH1 = document.createElement('h1');
+            myH1.textContent = reqData['squadName'];
+            document.getElementsByTagName('p')[0].appendChild(myH1);
+            let homeTime = document.createElement('h2')
+            homeTime.textContent = reqData['homeTown'] + ", ";
+            homeTime.textContent += reqData['formed'] + ", ";
+            homeTime.textContent += " at " + reqData['secretBase'] + ". ";
+            document.getElementsByTagName('p')[1].appendChild(homeTime);
+            let secondset = document.createElement('h2')
+
+            if (reqData['active'] === "true") {
+                secondset.textContent += " Status: Active.";
+            } else {
+                secondset.textContent += " Status: Not active. ";
+            }
+            secondset.textContent += "Number of members: " + reqData['members'].length + ".";
+            document.getElementsByTagName('p')[2].appendChild(secondset);
+        }
+
+
+        function populateMembers() {
+            let reqData2 = request.response;
+
+            let x = reqData2['members'];
+            x.forEach((y) => {
+                let myH4 = document.createElement('h4')
+                let z = y.powers;
+                myH4.innerHTML += "Alias: " + y.name + ",  " + "Age: " + y.age + ",  " + "Secret Identity:  " +
+                    y.secretIdentity + ", Powers:   ";
+                z.forEach((b) => {
+                    myH4.innerHTML += b + ", ";
+                })
+                //  y.powers + ". ";
+                document.getElementsByTagName('p')[3].appendChild(myH4);
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id="output">
+        <p>
+        </p>
+        <p>
+
+        </p>
+        <p>
+
+        </p>
+
+        </p>
+    </div>
+
+</body>
+
+</html>

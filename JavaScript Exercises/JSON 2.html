@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <script>
+        let reqURL = 'https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/kings.json';
+        let br = document.createElement("br");
+        let request = new XMLHttpRequest();
+        request.open('GET', reqURL);
+        request.responseType = 'json';
+        request.send();
+        request.onload = function () {
+        }
+
+        function searchFeature(input) {
+            let answer = [];
+            let reqData = request.response;
+            reqData.filter(function (a) {
+                let name = a.nm;
+                if (name === input) {
+                    answer.push(a)
+                }
+            })
+            printAnswer(turnObjectToString(answer[0]))
+        }
+
+        function turnObjectToString(obj) {
+            let string = obj.nm + ", " + obj.cty + ", " + obj.hse + ", " + obj.yrs + ".";
+            return string;
+        }
+
+        function printAnswer(input) {
+            window.alert(input)
+            document.getElementById("answer").innerHTML = input;
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        <div>
+            <label for="search">Input:  </label>
+            <input type="text" id="searchbox" name="searchbox">
+        </div>
+        <input type="button" onclick="searchFeature(searchbox.value)" value="Search!">
+    </form>
+    <div id="answer">
+    </div>
+</body>
+
+</html>
