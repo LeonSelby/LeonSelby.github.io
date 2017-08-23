@@ -71,6 +71,6 @@ function tour() {
       console.log("end " + count);
     }
   }
-  while (tmp.x !== 0 && tmp !== 0);
+  while (tmp.x !== 0 && tmp.y !== 0);
   alert("Solution: " + count);
 }
