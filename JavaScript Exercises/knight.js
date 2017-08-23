@@ -5,18 +5,6 @@ pointMaker = function (x, y) {
   return pt;
 }
 
-// const v1 = pointMaker(1, 2);
-// const v2 = pointMaker(1, -2);
-// const v3 = pointMaker(-1, -2);
-// const v4 = pointMaker(-1, 2);
-// const v5 = pointMaker(-2, -1);
-// const v6 = pointMaker(-2, 1);
-// const v7 = pointMaker(2, 1);
-// const v8 = pointMaker(2, -1);
-
-//EXPECT 5 ""
-// const start = pointMaker(0, 0);
-
 function tour() {
   let target = pointMaker(Number(document.getElementById('x').value), Number(document.getElementById('y').value));
   let count = 0;
