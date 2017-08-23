@@ -7,6 +7,7 @@ pointMaker = function (x, y) {
 
 function tour() {
   let target = pointMaker(Number(document.getElementById('x').value), Number(document.getElementById('y').value));
+  // let target = pointMaker(2, 8);
   let count = 0;
   let tmp = target;
   console.log(JSON.stringify(tmp));
@@ -21,6 +22,8 @@ function tour() {
       tmp.y -= 2;
       count++;
       console.log("2nd " + count);
+      console.log(JSON.stringify(tmp));
+
     } else if (tmp.x <= -1 && tmp.y <= -2 && tmp.x > tmp.y) { // BOTH NEG
       tmp.x += 1;
       tmp.y += 2;
@@ -59,6 +62,9 @@ function tour() {
       console.log("end " + count);
     }
   }
-  while (tmp.x !== 0 && tmp.y !== 0);
+  while ((tmp.x !== 0) && (tmp.y !== 0));
   alert("Solution: " + count);
+  console.log("Solution: " + count);
 }
+
+tour();
