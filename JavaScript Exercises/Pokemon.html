@@ -1,77 +1,45 @@
 <html>
 
 <head>
-    <!-- <script src="pokemonscript.js">
+    <script src="pokemonscript.js">
 
-    </script> -->
-    <script>
-        const reqURLPokemon = 'http://pokeapi.co/api/v2/pokemon/?limit=151';
-        const reqURLBASEPokemon = 'http://pokeapi.co/api/v2/pokemon/';
-        let names = [];
-        let types = [];
-        const br = document.createElement("br");
-        const request = new XMLHttpRequest();
-        request.open('GET', reqURLPokemon);
-        request.responseType = 'json';
-        request.send();
-        request.onload = function () {
-            const reqData = request.response;
-            const results = reqData['results'];
-            results.forEach((a) => {
-                names.push(a.name);
-            })
-            populateNamebox(1);
-            populateNamebox(2);
-        }
-        getType();
-
-
-        function populateNamebox(boxNumber) {
-            let box = document.getElementsByTagName('select')[boxNumber - 1];
-            names.forEach((a) => {
-                let option = document.createElement('option');
-                option.text = a;
-                box.add(option, box.length)
-            })
-        }
-
-
-        function getType(pokeID) {
-            const request2 = new XMLHttpRequest();
-            let number = id;
-            let reqURLBASEPokemonEdit = reqURLBASEPokemon + number + "\/";
-            request2.open('GET', reqURLBASEPokemonEdit)
-            request2.responseType = 'json';
-            request2.send();
-            request2.onload = function () {
-                const reqData2 = request2.response;
-                const types = reqData2.types;
-                console.log(JSON.stringify(types))
-            }
-        }
-
-        function getID()
-
-
-        function determineResult(pokeID1, pokeID2) {
-
-        }
     </script>
 </head>
 
 <body>
-    <select size="30" id="PokemonList1" name="ATTACKING POKEMON">
-            </select>
-    <select size="30" id="PokemonList2" name="DEFENDING POKEMON">
-                </select>
-
     <div>
-        <input type="button" id="determine" onclick="typeof(PokemonList1.value)" value="Determine Result!">
+        <select size="30" id="PokemonList1" onclick='selectPokeMethod(PokemonList1.selectedIndex, PokemonList2.selectedIndex)' name="ATTACKING POKEMON">
+            </select>
+        <!-- <select size="30" id="MovesList1" onclick='' name="MOVES"></select> -->
+        <select size="30" id="PokemonList2" onclick='placeImages(PokemonList1.selectedIndex, PokemonList2.selectedIndex)' name="DEFENDING POKEMON">
+                </select>
+    </div>
+    <div id="formoves"> </div>
+    <div>
+        <input type="button" id="determine" onclick="determineResult(PokemonList1.selectedIndex)" value="Determine Result!">
         </input>
     </div>
     <br>
+
+    <table style="width:50%">
+        <tr align="center">
+            <th>Attacking</th>
+            <th>Move</th>
+            <th>Defending</th>
+        </tr>
+        <tr align="center">
+            <td id="attackingpokemon"></td>
+            <td id="versus">Vs</td>
+            <td id="defendingpokemon"></td>
+        </tr>
+        <tr align="center">
+            <td id="attackingpokemonName"></td>
+            <td></td>
+            <td id="defendingpokemonName"></td>
+        </tr align="center">
+    </table>
     <div>
-        <p id="outputpara">You selected:
+        <p id="outputpara">
         </p>
     </div>
 </body>
