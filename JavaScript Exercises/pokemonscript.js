@@ -11,12 +11,11 @@ request.onload = function () {
     const reqData = request.response;
     const results = reqData['results'];
     let bulbasaur = results[0].name;
-    console.log(typeof results)
-    console.log(JSON.stringify(bulbasaur, null, 2))
+  
     results.forEach((a) => {
         names.push(a.name);
     })
-    console.log(JSON.stringify(names, null, 2))
+    populateNamebox1();
 }
 
 function populateNamebox1() {
