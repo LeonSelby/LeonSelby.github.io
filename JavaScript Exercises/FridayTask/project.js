@@ -1,9 +1,9 @@
 
-const bodyEle = document.getElementById("body");
-const formEle = document.getElementById("wrapperDiv");
-const image = document.getElementById("picture");
-const para = document.createElement('p');
-
+const bodyEle = document.getElementById('body')
+const formEle = document.getElementById('wrapperDiv')
+const formEle2 = document.getElementsByName('wrapperDiv')
+const image = document.getElementById('picture')
+const para = document.createElement('p')
 
 let counter = 0;
 let example = "please please"
@@ -16,6 +16,7 @@ function test() {
 
 console.log(image!=null)
 console.log(formEle!=null)
+console.log(formEle2!=null)
 console.log(bodyEle!=null)
 
 
