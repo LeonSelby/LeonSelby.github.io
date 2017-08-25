@@ -12,6 +12,7 @@ const sourcePics = "pics/";
 let lives = 7;
 let numRight = 0;
 let numWrong = 0;
+let guessesMade = 0;
 let chosenWord = "";
 let correctArray = [];
 let guessArray = [];
@@ -22,7 +23,25 @@ let easyDifficulty = 1;
 let normalDifficulty = 0;
 let hardDifficulty = 0;
 
-let wordBatch = ["please work", "john", "ben", "leon", "pocketboy", "eastenders", "elliott"]
+let wordBatch = ["please work", "john", "ben", "leon", "pocketboy", "eastenders", "elliott", "hangman",];
+
+let Statistics = {
+    name: "",
+    played: 0,
+    lost: 0,
+    won: 0,
+    winPercentage: this.played > 0 ? this.won / this.played * 100 : 0,
+    leastGuesses: 0,
+    mostGuesses: 0,
+}
+
+function saveToLocal() {
+    localStorage.setItem('stats', JSON.stringify(Statistics));
+}
+
+function printStats() {
+    console.log(JSON.stringify(Statistics, null, 2));
+}
 
 function setToEasy() {
     easyDifficulty = 1;
@@ -102,14 +121,40 @@ function checkVictory() {
 
     if (temp === true && lives > 0) {
         winSec.innerHTML = "You win!";
+        Statistics.won++;
+        Statistics.played++;
+        writeGuessStats();
+
     }
     if (temp === false && lives <= 0) {
         winSec.innerHTML = "You lose!";
+        Statistics.lost++;
+        Statistics.played++;
+        writeGuessStats();
     }
     if (temp === true && lives <= 0) {
         winSec.innerHTML = "Took you long enough!"
     }
 }
+function writeGuessStats() {
+    writeLeastGuesses();
+    writeMostGuesses();
+}
+
+function writeLeastGuesses() {
+    let bestGame = localStorage.getItem('Stats').leastGuesses;
+    let stat = localStorage.getItem('Stats');
+    stat.leastGuesses = Math.min(bestGame, guessesMade);
+    localStorage.setItem('Stats', stat);
+}
+
+function writeMostGuesses() {
+    let worstGame = localStorage.getItem('Stats').mostGuesses;
+    let stat = localStorage.getItem('Stats');
+    stat.mostGuesses = Math.max(worstGame, guessesMade);
+    localStorage.setItem('Stats', stat);
+}
+
 
 function blanksGen(input) {
     let blankString = "";
@@ -132,6 +177,7 @@ function guess(guessedLetter) {
         window.alert("Input a letter!")
         return 0;
     }
+    Statistics.guessesMade++;
     loseLife = true;
     for (let i = 0; i < correctArray.length; i++) {
         if (guessedLetter === correctArray[i]) {
@@ -150,6 +196,7 @@ function guess(guessedLetter) {
     updateImage();
     checkVictory();
     entryBox.value = "";
+    saveToLocal();
 }
 
 function updateGuessSection() {
@@ -178,3 +225,5 @@ function updateImage() {
     }
 
 }
+
+printStats();
