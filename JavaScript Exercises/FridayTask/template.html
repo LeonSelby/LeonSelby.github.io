@@ -1,27 +1,40 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="project.js">
 
-    </script>
 </head>
 
-<body id="bodyID" name="body" text-align="center">
-    <div name="wrapperDiv" id="wrapperDiv">
-        <h1 align="center"> Title<br> Fill in a subheading!</h1>
+<body id="bodyID" name="body" text-align="center" onload="startUp()">
+    <div name="wrapperDiv" id="wrapperDivID">
+        <h1 align="center"> Hangman<br> Guess the word!</h1>
+        <div id="diffDiv" align="center"> </div>
+        <p id="diffPara" align="center"> Difficulty: </p>
+        <form id="diffForm" align="center">
+
+            <input id="EasyButton" type="button" value="Easy" size="10" onclick="setToEasy()">
+            <input id="NormalButton" type="button" value="Normal" size="10" onclick="setToNormal()">
+            <input id="HardButton" type="button" value="Hard" size="10" onclick="setToHard()">
+
+        </form>
+
+        <br><br>
         <form name="form" id="formID" align="center">
-            <input name="entryBox" type="text" text-align="center" size="10" maxlength="1">
-            <input name="button" type="button" value="button" onclick="doSomething(entryBox.value)">
+            <input name="entryBox" id="entryBoxID" type="text" text-align="center" size="10" maxlength="1" onkeypress="if (event.keyCode == 13) {guess(entryBox.value); return false}">
+            <input name="button" id="guessButton" type="button" value="Guess!" onclick="guess(entryBox.value)">
             <br>
-            <p id="abovePic">This is a paragraph tag above pic</p>
-            <img id="picture">
-            <p id="belowPic">This is a paragraph tag below pic</p>
+            <p id="abovePic"></p>
+            <img id="picture" src="pics/0.jpg" width="50%">
+            <p id="belowPic">Lives left: </p>
             <br>
-            <input name="button2" type="button" value="button2" onClick="location.reload()">
+            <p id="guessedWrong">Wrong Guesses: </p>
+            <input name="button2" type="button" value="Refresh" onClick="location.reload()">
             <br>
         </form>
-        <h2 align="center"> More Text</h2>
+        <h2 id="winSection" align="center"></h2>
     </div>
 </body>
+<script type="text/javascript" src="project.js">
+
+</script>
 
 </html>
