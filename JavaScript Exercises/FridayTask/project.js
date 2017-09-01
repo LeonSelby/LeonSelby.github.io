@@ -23,7 +23,7 @@ let easyDifficulty = 1;
 let normalDifficulty = 0;
 let hardDifficulty = 0;
 
-let wordBatch = ["please work", "john", "ben", "leon", "pocketboy", "eastenders", "elliott", "hangman",];
+let wordBatch = ["please work", "alexandra", "international", "university", "john", "ben", "leon", "pocketboy", "eastenders", "elliott", "hangman",];
 
 let Statistics = {
     name: "",
@@ -33,14 +33,6 @@ let Statistics = {
     winPercentage: this.played > 0 ? this.won / this.played * 100 : 0,
     leastGuesses: 0,
     mostGuesses: 0,
-}
-
-function saveToLocal() {
-    localStorage.setItem('stats', JSON.stringify(Statistics));
-}
-
-function printStats() {
-    console.log(JSON.stringify(Statistics, null, 2));
 }
 
 function setToEasy() {
@@ -196,7 +188,6 @@ function guess(guessedLetter) {
     updateImage();
     checkVictory();
     entryBox.value = "";
-    saveToLocal();
 }
 
 function updateGuessSection() {

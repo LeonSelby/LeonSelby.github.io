@@ -20,10 +20,10 @@
         <br><br>
         <form name="form" id="formID" align="center">
             <input name="entryBox" id="entryBoxID" type="text" text-align="center" size="10" maxlength="1" onkeypress="if (event.keyCode == 13) {guess(entryBox.value); return false}">
-            <input name="button" id="guessButton" type="button" value="Guess!" onclick="guess(entryBox.value)">
+            <input name="button" id="guessButton" type="button" value="Guess!" onclick="guess(entryBox.value.toLowerCase())">
             <br>
             <p id="abovePic"></p>
-            <img id="picture" src="pics/0.jpg" width="40%">
+            <img id="picture" src="pics/0.jpg" width="35%">
             <p id="belowPic">Lives left: </p>
             <br>
             <p id="guessedWrong">Wrong Guesses: </p>
@@ -34,7 +34,6 @@
     </div>
 </body>
 <script type="text/javascript" src="project.js">
-
 </script>
 
 </html>
