@@ -1,27 +1,51 @@
-const reqURLPokemon = 'http://pokeapi.co/api/v2/pokemon/?limit=151';
-const reqURLBASEPokemon = 'http://pokeapi.co/api/v2/pokemon/';
+const fetch = require('node-fetch')
 const imageLoc = 'https://leonselby.github.io/JavaScript%20Exercises/pokeSprites/';
-let names = [];
-let moves = [];
-let types = [];
-const br = document.createElement("br");
-const request = new XMLHttpRequest();
-request.open('GET', reqURLPokemon);
-request.responseType = 'json';
-request.send();
-request.onload = function () {
-    const reqData = request.response;
-    const results = reqData['results'];
+
+async function fetchPokemonNames() {
+    const response = await fetch(`http://pokeapi.co/api/v2/pokemon/?limit=151`);
+    const data = await response.json();
+    const results = data['results'];
+    let names = [];
     results.forEach((a) => {
-        names.push(a.name);
+        names.push(a.name)
     })
-    populateNameboxes();
-    getTypes(2);
+    return names;
 }
+
+async function fetchPokemonMoves(PokeID) {
+    const response = await fetch(`http://pokeapi.co/api/v2/pokemon/${PokeID}`);
+    const data = await response.json();
+    let moves = data['moves'];
+    moves = moves.map((c) => {
+        return c.move.name
+    });
+    return moves;
+}
+
+async function fetchPokemonTypes(PokeID) {
+    const response = await fetch(`http://pokeapi.co/api/v2/pokemon/${PokeID}`);
+    const data = await response.json();
+    let types = data['types'];
+    types = types.map((c) => {
+        return c.type.name
+    });
+    return types;
+}
+
+async function fetchMovesTypes(MoveName) {
+    const response = await fetch(`http://pokeapi.co/api/v2/move/${MoveName}`);
+    const data = await response.json();
+    let type = data['type'].name;
+    type;
+    return type;
+}
+
+fetchMovesTypes("razor-wind")
 
 function populateNameboxes() {
     let box = document.getElementsByTagName('select')[0];
     let box2 = document.getElementsByTagName('select')[1];
+    let names = fetchPokemonNames();
     names.forEach((a) => {
         let option = document.createElement('option');
         let option2 = document.createElement('option');
@@ -32,44 +56,6 @@ function populateNameboxes() {
         option.id = box.length;
         option2.id = box2.length;
     })
-}
-
-function getTypes(pokeID, cb) {
-    let typenames = [];
-    const request2 = new XMLHttpRequest();
-    let number = pokeID;
-    let reqURLBASEPokemonEdit = reqURLBASEPokemon + number + "\/";
-    request2.open('GET', reqURLBASEPokemonEdit)
-    request2.responseType = 'json';
-    request2.send();
-    request2.onload = function () {
-        const reqData2 = request2.response;
-        let typesResults = reqData2.types;
-        typenames = [];
-        typenames = typesResults.map((d) => {
-            return d.type.name;
-        })
-    }
-}
-
-
-
-function getMoves(pokeIDa, cb) {
-    const req3 = new XMLHttpRequest();
-    let numberPoke = pokeIDa + 1;
-    let reqURLMOVEEdit = reqURLBASEPokemon + numberPoke;
-    req3.open('GET', reqURLMOVEEdit);
-    req3.responseType = 'json';
-    req3.send();
-    req3.onload = function () {
-        const reqData3 = req3.response;
-        let movesResult = reqData3['moves'];
-        let movesNames = [];
-        movesNames = movesResult.map((c) => {
-            return c.move.name
-        })
-        cb(movesNames);
-    }
 }
 
 function clearBoxes() {
@@ -87,14 +73,16 @@ function populateMovesBox(pokemonID) {
         metabox.removeChild(metabox.childNodes[0]);
     }
     metabox.appendChild(movesBox);
-    getMoves(pokemonID, (movesNames) => {
-        movesNames.forEach((b) => {
+    let moves = fetchPokemonMoves(pokemonID);
+
+    () => {
+        moves.forEach((b) => {
             let moveOption = document.createElement('option');
             moveOption.text = b;
             movesBox.add(moveOption, movesBox.length);
             moveOption.id = movesBox.length;
         })
-    });
+    }
 }
 
 function placeImageAtk(numID) {
@@ -132,3 +120,4 @@ function placeImages(numIDatk, numIDdef) {
     placeImageAtk(numIDatk);
     placeImageDef(numIDdef);
 }
+
