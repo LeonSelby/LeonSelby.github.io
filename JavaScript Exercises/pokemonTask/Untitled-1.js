@@ -31,7 +31,7 @@ Array.prototype.contains = function (obj) {
 }
 
 async function fetchPokemonNames() {
-    const response = await fetch(`http://pokeapi.co/api/v2/pokemon/?limit=151`);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=151`);
     const data = await response.json();
     const results = data['results'];
     let names = [];
@@ -42,7 +42,7 @@ async function fetchPokemonNames() {
 }
 
 async function fetchPokemonMoves(PokeID) {
-    const response = await fetch(`http://pokeapi.co/api/v2/pokemon/${PokeID + 1}`);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${PokeID + 1}`);
     const data = await response.json();
     let moves = data['moves'];
     moves = moves.map((c) => {
@@ -52,7 +52,7 @@ async function fetchPokemonMoves(PokeID) {
 }
 
 async function fetchPokemonTypes(PokeID) {
-    const response = await fetch(`http://pokeapi.co/api/v2/pokemon/${PokeID}`);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${PokeID}`);
     const data = await response.json();
     let types = data['types'];
     types = types.map((c) => {
@@ -62,7 +62,7 @@ async function fetchPokemonTypes(PokeID) {
 }
 
 async function fetchMovesTypes(MoveName) {
-    const response = await fetch(`http://pokeapi.co/api/v2/move/${MoveName}`);
+    const response = await fetch(`https://pokeapi.co/api/v2/move/${MoveName}`);
     const data = await response.json();
     let type = data['type'].name;
     return type;
@@ -70,7 +70,7 @@ async function fetchMovesTypes(MoveName) {
 
 async function fetchTypeSuperEffectivesPromise(TypeName) {
     let typeID = typesArray.indexOf(TypeName.toLowerCase()) + 1;
-    const response = await fetch(`http://pokeapi.co/api/v2/type/${typeID}`);
+    const response = await fetch(`https://pokeapi.co/api/v2/type/${typeID}`);
     const data = await response.json();
     const damageRelations = data['damage_relations'];
     const doubleDMGTo = damageRelations['double_damage_to'];
