@@ -1,3 +1,5 @@
+// const fetch = require('node-fetch');
+
 const imageLoc = 'https://leonselby.github.io/JavaScript%20Exercises/pokemonTask/pokeSprites/';
 const typesArray = [
     "normal",
@@ -19,6 +21,8 @@ const typesArray = [
     "dark",
     "fairy"
 ]// index + 1 is its ID
+
+let typeOfMove;
 
 Array.prototype.contains = function (obj) {
     var i = this.length;
@@ -69,7 +73,7 @@ async function fetchMovesTypes(MoveName) {
 }
 
 async function fetchTypeSuperEffectivesPromise(TypeName) {
-    let typeID = typesArray.indexOf(TypeName.toLowerCase()) + 1;
+    let typeID = typesArray.indexOf(typeOfMove.toLowerCase()) + 1;
     const response = await fetch(`https://pokeapi.co/api/v2/type/${typeID}`);
     const data = await response.json();
     const damageRelations = data['damage_relations'];
@@ -104,9 +108,8 @@ async function determineResult(moveName, defPokeID) {
     let counter = 0;
     let damageMultiplier = 1;
     let realDefID = defPokeID + 1;
-    let moveType = await resolveMoveTypePromise(moveName);
     let defTypes = await resolveDefTypesPromise(realDefID); //returns array
-    let doubleAgainstTypes = await resolveTypeSupEffectPromise(moveType); //returns array
+    let doubleAgainstTypes = await resolveTypeSupEffectPromise(typeOfMove); //returns array
 
     doubleAgainstTypes.forEach((type) => {
         defTypes.forEach((defType) => {
@@ -131,6 +134,8 @@ async function resolveMoveTypePromise(moveName) {
         .then((a) => moveType = a);
     return promise3;
 }
+
+
 
 function populateNameboxes() {
     let box = document.getElementById('PokemonList1');
@@ -162,10 +167,13 @@ function populateMovesBox(pokemonID) {
     let metabox = document.getElementById('formoves');
     let movesBox = document.createElement('select');
     movesBox.id = "movesboxx";
+    movesBox.size = "30";
     if (metabox.hasChildNodes()) {
         metabox.removeChild(metabox.childNodes[0]);
     }
     metabox.appendChild(movesBox);
+    let att = document.createAttribute("onClick")
+    att.value = "console.log(\"1\")";
     let promise2 = Promise.resolve(fetchPokemonMoves(pokemonID));
     promise2.then((a) => {
         a.forEach((b) => {
@@ -173,9 +181,16 @@ function populateMovesBox(pokemonID) {
             moveOption.text = b;
             movesBox.add(moveOption, movesBox.length);
             moveOption.id = movesBox.length;
+            let att2 = document.createAttribute("onClick")
+            att2.value = "storeMovesTypes(movesboxx.value)";
+            moveOption.setAttributeNode(att2);
         })
     })
+}
 
+async function storeMovesTypes(moveName){
+    typeOfMove = await resolveMoveTypePromise(moveName);
+    console.log(typeOfMove + " type")
 }
 
 function placeImageAtk(numID) {

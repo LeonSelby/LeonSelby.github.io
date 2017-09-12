@@ -5,13 +5,27 @@
 
 <body>
     <div>
-        <select size="30" id="PokemonList1" onclick='selectPokeMethod(PokemonList1.selectedIndex, PokemonList2.selectedIndex)' name="ATTACKING POKEMON">
-            </select>
-        <!-- <select size="30" id="MovesList1" onclick='' name="MOVES"></select> -->
-        <select size="30" id="PokemonList2" onclick='placeImages(PokemonList1.selectedIndex, PokemonList2.selectedIndex)' name="DEFENDING POKEMON">
-                </select>
+        <div>
+            <h2>Simulate Pokémon battles by <br>selecting an attacking and defending Pokémon, and the attack!</h2>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td><select size="30" id="PokemonList1" onclick='selectPokeMethod(PokemonList1.selectedIndex, PokemonList2.selectedIndex)'
+                            name="ATTACKING POKEMON">
+        </select></td>
+                    <td>
+                        <div id="formoves"></div>
+                    </td>
+                    <td><select size="30" id="PokemonList2" onclick='placeImages(PokemonList1.selectedIndex, PokemonList2.selectedIndex)'
+                            name="DEFENDING POKEMON">
+        </select></td>
+                </tr>
+
+            </table>
+        </div>
     </div>
-    <div id="formoves"> </div>
+
     <div>
         <input type="button" id="determine" onclick="determineResult(movesboxx.value, PokemonList2.selectedIndex)" value="Determine Result!">
         </input>
@@ -41,8 +55,8 @@
     </div>
     <footer>
         <script src="Untitled-1.js">
-            
-                </script>
+
+        </script>
     </footer>
 </body>
 
