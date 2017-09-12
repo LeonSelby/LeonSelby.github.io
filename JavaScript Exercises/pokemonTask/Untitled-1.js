@@ -1,4 +1,3 @@
-// const fetch = require('node-fetch')
 const imageLoc = 'https://leonselby.github.io/JavaScript%20Exercises/pokemonTask/pokeSprites/';
 const typesArray = [
     "normal",
