@@ -71,7 +71,6 @@ function chooseRandWord() {
     if (easyDifficulty === 1) {
         do {
             tmp = wordBatch[randomNumberGenerator(wordBatch.length)]
-            console.log(tmp)
         } while (tmp.length < 9)
     }
     if (normalDifficulty === 1) {
@@ -113,40 +112,14 @@ function checkVictory() {
 
     if (temp === true && lives > 0) {
         winSec.innerHTML = "You win!";
-        Statistics.won++;
-        Statistics.played++;
-        writeGuessStats();
-
     }
     if (temp === false && lives <= 0) {
         winSec.innerHTML = "You lose!";
-        Statistics.lost++;
-        Statistics.played++;
-        writeGuessStats();
     }
     if (temp === true && lives <= 0) {
         winSec.innerHTML = "Took you long enough!"
     }
 }
-function writeGuessStats() {
-    writeLeastGuesses();
-    writeMostGuesses();
-}
-
-function writeLeastGuesses() {
-    let bestGame = localStorage.getItem('Stats').leastGuesses;
-    let stat = localStorage.getItem('Stats');
-    stat.leastGuesses = Math.min(bestGame, guessesMade);
-    localStorage.setItem('Stats', stat);
-}
-
-function writeMostGuesses() {
-    let worstGame = localStorage.getItem('Stats').mostGuesses;
-    let stat = localStorage.getItem('Stats');
-    stat.mostGuesses = Math.max(worstGame, guessesMade);
-    localStorage.setItem('Stats', stat);
-}
-
 
 function blanksGen(input) {
     let blankString = "";
@@ -169,7 +142,6 @@ function guess(guessedLetter) {
         window.alert("Input a letter!")
         return 0;
     }
-    Statistics.guessesMade++;
     loseLife = true;
     for (let i = 0; i < correctArray.length; i++) {
         if (guessedLetter === correctArray[i]) {
@@ -214,7 +186,4 @@ function updateImage() {
     } else {
         image.src = sourcePics + 7 + ".jpg";
     }
-
 }
-
-printStats();
